@@ -23,15 +23,24 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Prepare Capacitor & Sync Android
+      - name: Force Clean Environment & Build APK
         run: |
+          # 1. Force initialize node and install Capacitor
+          npm init -y
           npm install @capacitor/core @capacitor/cli @capacitor/android
-          npx cap init "Apex Clock" "com.suyog.clock" --web-dir . || true
-          if [ ! -d "android" ]; then npx cap add android; fi
+          
+          # 2. Force create the 'www' folder Capacitor needs
+          mkdir -p www
+          cp index.html style.css app.js manifest.json sw.js www/ || true
+          
+          # 3. Force initialize Capacitor config to point to 'www'
+          npx cap init "Apex Clock" "com.suyog.clock" --web-dir www --force
+          
+          # 4. Generate the Android platform natively on the server
+          npx cap add android
           npx cap sync android
-
-      - name: Build Android APK
-        run: |
+          
+          # 5. Build the APK
           cd android
           chmod +x gradlew
           ./gradlew assembleDebug

@@ -23,23 +23,18 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Nuke Leftovers and Build
+      - name: Clean Environment & Build
         run: |
-          # 1. Nuke any leftover configs to prevent conflicts
           rm -rf android www capacitor.config.* package*.json node_modules
           
-          # 2. Fresh Node and Capacitor setup
           npm init -y
           npm install @capacitor/core @capacitor/cli @capacitor/android
           
-          # 3. Create the web folder and move your files into it
           mkdir -p www
           cp index.html style.css app.js manifest.json sw.js www/ || true
           
-          # 4. Initialize Capacitor
           npx cap init "Forge Clock" "com.suyog.clock" --web-dir www
           
-          # 5. Add Android and build
           npx cap add android
           cd android
           chmod +x gradlew
@@ -48,5 +43,5 @@ jobs:
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: Forge Clock-Debug-APK
+          name: ForgeClock-Debug-APK
           path: android/app/build/outputs/apk/debug/app-debug.apk

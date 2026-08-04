@@ -1,67 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Forge Clock</title>
-  <link rel="manifest" href="manifest.json">
-  <link rel="stylesheet" href="style.css">
-  <meta name="theme-color" content="#0b0f19">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Forge Clock</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
   <div class="app-container">
-    <!-- Top Bar -->
-    <header class="app-header">
-      <h2 id="appTitle">World Clock</h2>
-      <select id="themeSelector" class="theme-dropdown"></select>
+    <header>
+      <h1>Forge Clock</h1>
+      <p class="subtitle">World Clock, Alarms & Precision Stopwatch</p>
     </header>
 
-    <!-- Navigation Tabs -->
-    <nav class="tab-bar">
-      <button class="tab-btn active" data-tab="world-clock">🌍 World</button>
-      <button class="tab-btn" data-tab="alarm">⏰ Alarm</button>
-      <button class="tab-btn" data-tab="stopwatch">⏱️ Stopwatch</button>
-    </nav>
-
-    <!-- Tab 1: World Clock -->
-    <section id="world-clock" class="tab-content active">
-      <div class="main-display">
-        <h1 id="localTime">00:00:00</h1>
-        <p id="localDate">Loading...</p>
-      </div>
-
-      <div class="search-box">
-        <input type="text" id="citySearch" placeholder="Search 400+ world cities (e.g., Tokyo, London, Kolkata)...">
-        <div id="searchResults" class="search-results hidden"></div>
-      </div>
-
-      <h3>Favorite Clocks</h3>
-      <div id="favoritesList" class="cards-grid"></div>
+    <!-- Main Clock Display -->
+    <section class="clock-card">
+      <div id="liveClock" class="digital-time">00:00:00</div>
+      <div id="liveDate" class="digital-date">Loading date...</div>
     </section>
 
-    <!-- Tab 2: Alarm -->
-    <section id="alarm" class="tab-content">
-      <div class="card-box">
-        <h3>Set New Alarm</h3>
-        <div class="alarm-inputs">
-          <input type="time" id="alarmTime" required>
-          <input type="text" id="alarmLabel" placeholder="Alarm Label (e.g. Gym, Study)">
-          <button id="addAlarmBtn" class="btn primary">Add Alarm</button>
-        </div>
+    <!-- Alarm Configuration Section -->
+    <section class="card">
+      <h2>Set Alarm</h2>
+      <div class="form-group">
+        <label for="alarmTime">Alarm Time:</label>
+        <input type="time" id="alarmTime" required />
       </div>
-      <div id="alarmsList" class="cards-grid"></div>
+
+      <div class="form-group">
+        <label for="alarmSoundSelect">Select Ringtone (100 Tones):</label>
+        <select id="alarmSoundSelect"></select>
+      </div>
+
+      <div class="button-group">
+        <button id="setAlarmBtn" class="btn primary">Set Alarm</button>
+        <button id="testSoundBtn" class="btn secondary">Test Sound & Vibrate</button>
+      </div>
+
+      <div id="alarmStatus" class="status-msg">No active alarm set</div>
     </section>
 
-    <!-- Tab 3: Stopwatch -->
-    <section id="stopwatch" class="tab-content">
-      <div class="main-display">
-        <h1 id="swDisplay">00:00.00</h1>
-      </div>
-      <div class="controls">
+    <!-- Stopwatch Section -->
+    <section class="card">
+      <h2>Stopwatch</h2>
+      <div id="swDisplay" class="digital-time small">00:00.00</div>
+      <div class="button-group">
         <button id="swStartBtn" class="btn primary">Start</button>
-
-        <button id="swLapBtn" class="btn" disabled>Lap</button>
+        <button id="swLapBtn" class="btn secondary" disabled>Lap</button>
         <button id="swResetBtn" class="btn danger" disabled>Reset</button>
       </div>
       <ul id="swLaps" class="laps-list"></ul>

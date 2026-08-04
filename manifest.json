@@ -5,7 +5,7 @@
   "display": "standalone",
   "background_color": "#0b0f19",
   "theme_color": "#38bdf8",
-  "description": "World clock, stopwatch, alarms, and custom themes.",
+  "description": "World clock, 100 alarm tones, vibration, and precision stopwatch.",
   "icons": [
     {
       "src": "https://cdn-icons-png.flaticon.com/512/2088/2088617.png",

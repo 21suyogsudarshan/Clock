@@ -23,11 +23,11 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Initialize Capacitor & Create Android Platform
+      - name: Prepare Capacitor & Sync Android
         run: |
           npm install @capacitor/core @capacitor/cli @capacitor/android
-          npx cap init "Apex Clock" "com.suyog.clock" --web-dir .
-          npx cap add android
+          npx cap init "Apex Clock" "com.suyog.clock" --web-dir . || true
+          if [ ! -d "android" ]; then npx cap add android; fi
           npx cap sync android
 
       - name: Build Android APK

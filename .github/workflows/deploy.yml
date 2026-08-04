@@ -37,7 +37,7 @@ jobs:
           cp index.html style.css app.js manifest.json sw.js www/ || true
           
           # 4. Initialize Capacitor
-          npx cap init "Apex Clock" "com.suyog.clock" --web-dir www
+          npx cap init "Forge Clock" "com.suyog.clock" --web-dir www
           
           # 5. Add Android and build
           npx cap add android
@@ -48,5 +48,5 @@ jobs:
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ApexClock-Debug-APK
+          name: Forge Clock-Debug-APK
           path: android/app/build/outputs/apk/debug/app-debug.apk

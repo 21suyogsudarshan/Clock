@@ -1,6 +1,6 @@
 {
-  "name": "Apex Pro Clock",
-  "short_name": "Apex Clock",
+  "name": "Forge Clock Pro",
+  "short_name": "Forge Clock",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#0b0f19",

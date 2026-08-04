@@ -15,8 +15,8 @@ jobs:
       - name: Set up Java JDK
         uses: actions/setup-java@v4
         with:
-          distribution: 'zulu'
-          java-version: '17'
+          distribution: 'temurin'
+          java-version: '21'
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -25,7 +25,7 @@ jobs:
 
       - name: Nuke Leftovers and Build
         run: |
-          # 1. Nuke any leftover configs from previous local attempts to prevent conflicts
+          # 1. Nuke any leftover configs to prevent conflicts
           rm -rf android www capacitor.config.* package*.json node_modules
           
           # 2. Fresh Node and Capacitor setup
@@ -36,7 +36,7 @@ jobs:
           mkdir -p www
           cp index.html style.css app.js manifest.json sw.js www/ || true
           
-          # 4. Initialize Capacitor (creates a fresh capacitor.config.json)
+          # 4. Initialize Capacitor
           npx cap init "Apex Clock" "com.suyog.clock" --web-dir www
           
           # 5. Add Android and build

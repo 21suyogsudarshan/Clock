@@ -3,32 +3,71 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Apex World Clock</title>
+  <title>Apex Pro Clock</title>
+  <link rel="manifest" href="manifest.json">
   <link rel="stylesheet" href="style.css">
+  <meta name="theme-color" content="#0b0f19">
 </head>
 <body>
-  <main class="clock-card">
-    <header class="header">
-      <span class="badge">Live Time</span>
-      <h1 id="localTime">00:00:00</h1>
-      <p id="localDate">Loading date...</p>
+
+  <div class="app-container">
+    <!-- Top Bar -->
+    <header class="app-header">
+      <h2 id="appTitle">World Clock</h2>
+      <select id="themeSelector" class="theme-dropdown"></select>
     </header>
 
-    <section class="world-grid">
-      <article class="city-card">
-        <span class="city-name">New York</span>
-        <span class="city-time" id="nyTime">00:00</span>
-      </article>
-      <article class="city-card">
-        <span class="city-name">London</span>
-        <span class="city-time" id="londonTime">00:00</span>
-      </article>
-      <article class="city-card">
-        <span class="city-name">Tokyo</span>
-        <span class="city-time" id="tokyoTime">00:00</span>
-      </article>
+    <!-- Navigation Tabs -->
+    <nav class="tab-bar">
+      <button class="tab-btn active" data-tab="world-clock">🌍 World</button>
+      <button class="tab-btn" data-tab="alarm">⏰ Alarm</button>
+      <button class="tab-btn" data-tab="stopwatch">⏱️ Stopwatch</button>
+    </nav>
+
+    <!-- Tab 1: World Clock -->
+    <section id="world-clock" class="tab-content active">
+      <div class="main-display">
+        <h1 id="localTime">00:00:00</h1>
+        <p id="localDate">Loading...</p>
+      </div>
+
+      <div class="search-box">
+        <input type="text" id="citySearch" placeholder="Search 400+ world cities (e.g., Tokyo, London, Kolkata)...">
+        <div id="searchResults" class="search-results hidden"></div>
+      </div>
+
+      <h3>Favorite Clocks</h3>
+      <div id="favoritesList" class="cards-grid"></div>
     </section>
-  </main>
+
+    <!-- Tab 2: Alarm -->
+    <section id="alarm" class="tab-content">
+      <div class="card-box">
+        <h3>Set New Alarm</h3>
+        <div class="alarm-inputs">
+          <input type="time" id="alarmTime" required>
+          <input type="text" id="alarmLabel" placeholder="Alarm Label (e.g. Gym, Study)">
+          <button id="addAlarmBtn" class="btn primary">Add Alarm</button>
+        </div>
+      </div>
+      <div id="alarmsList" class="cards-grid"></div>
+    </section>
+
+    <!-- Tab 3: Stopwatch -->
+    <section id="stopwatch" class="tab-content">
+      <div class="main-display">
+        <h1 id="swDisplay">00:00.00</h1>
+      </div>
+      <div class="controls">
+        <button id="swStartBtn" class="btn primary">Start</button>
+
+        <button id="swLapBtn" class="btn" disabled>Lap</button>
+        <button id="swResetBtn" class="btn danger" disabled>Reset</button>
+      </div>
+      <ul id="swLaps" class="laps-list"></ul>
+    </section>
+  </div>
+
   <script src="app.js"></script>
 </body>
 </html>

@@ -23,10 +23,12 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Install Dependencies & Copy Assets
+      - name: Initialize Capacitor & Create Android Platform
         run: |
-          npm ci || npm install
-          npx cap copy android
+          npm install @capacitor/core @capacitor/cli @capacitor/android
+          npx cap init "Apex Clock" "com.suyog.clock" --web-dir .
+          npx cap add android
+          npx cap sync android
 
       - name: Build Android APK
         run: |

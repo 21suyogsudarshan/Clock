@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apex World Clock</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="clock-card">
+    <header class="header">
+      <span class="badge">Live Time</span>
+      <h1 id="localTime">00:00:00</h1>
+      <p id="localDate">Loading date...</p>
+    </header>
+
+    <section class="world-grid">
+      <article class="city-card">
+        <span class="city-name">New York</span>
+        <span class="city-time" id="nyTime">00:00</span>
+      </article>
+      <article class="city-card">
+        <span class="city-name">London</span>
+        <span class="city-time" id="londonTime">00:00</span>
+      </article>
+      <article class="city-card">
+        <span class="city-name">Tokyo</span>
+        <span class="city-time" id="tokyoTime">00:00</span>
+      </article>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

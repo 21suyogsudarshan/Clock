@@ -20,6 +20,24 @@
       <div id="liveDate" class="digital-date">Loading date...</div>
     </section>
 
+    <!-- World Clock Section -->
+    <section class="card">
+      <h2>World Clock</h2>
+      <div class="form-group">
+        <label for="citySelect">Add City:</label>
+        <select id="citySelect">
+          <option value="America/New_York">New York (EST/EDT)</option>
+          <option value="Europe/London">London (GMT/BST)</option>
+          <option value="Asia/Tokyo">Tokyo (JST)</option>
+          <option value="Asia/Dubai">Dubai (GST)</option>
+          <option value="Australia/Sydney">Sydney (AEST/AEDT)</option>
+          <option value="UTC">UTC (Universal Time)</option>
+        </select>
+      </div>
+      <button id="addCityBtn" class="btn secondary">Add World City</button>
+      <div id="worldClockList" class="laps-list" style="margin-top: 15px; max-height: none;"></div>
+    </section>
+
     <!-- Alarm Configuration Section -->
     <section class="card">
       <h2>Set Alarm</h2>

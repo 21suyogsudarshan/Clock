@@ -2,9 +2,10 @@
 // FORGE CLOCK: CORE LOGIC & 100 TONES ENGINE
 // ==========================================
 
-// Global Alarm State
+// Global Alarm & World Clock State
 let activeAlarmTime = null;
 let activeAlarmTone = 1;
+let worldCities = ["America/New_York", "Europe/London", "Asia/Tokyo"];
 
 // Initialize 100 Tones in Dropdown
 const alarmSoundSelect = document.getElementById("alarmSoundSelect");
@@ -70,6 +71,32 @@ function fireAlarm(soundNumber) {
   triggerVibration();
 }
 
+// 4. Update World Clock Display
+function updateWorldClocks() {
+  const container = document.getElementById("worldClockList");
+  if (!container) return;
+  container.innerHTML = "";
+
+  const now = new Date();
+
+  worldCities.forEach((timeZone) => {
+    try {
+      const timeStr = now.toLocaleTimeString("en-US", { timeZone, hour12: false });
+      const cityName = timeZone.split("/")[1] || timeZone;
+      
+      const item = document.createElement("div");
+      item.style.cssText = "display: flex; justify-content: space-between; padding: 8px 12px; border-bottom: 1px solid #334155; align-items: center;";
+      item.innerHTML = `
+        <span style="font-weight: 600; color: #cbd5e1;">${cityName.replace("_", " ")}</span>
+        <span style="font-family: monospace; font-size: 1.1rem; color: #38bdf8;">${timeStr}</span>
+      `;
+      container.appendChild(item);
+    } catch (e) {
+      console.error("Invalid TimeZone:", timeZone);
+    }
+  });
+}
+
 // Live Clock Interval
 function updateClock() {
   const now = new Date();
@@ -82,6 +109,9 @@ function updateClock() {
   const options = { weekday: "long", year: "numeric", month: "long", day: "numeric" };
   document.getElementById("liveDate").textContent = now.toLocaleDateString(undefined, options);
 
+  // Update World Clocks
+  updateWorldClocks();
+
   // Check Alarm
   const currentTimeString = `${hours}:${minutes}`;
   if (activeAlarmTime && currentTimeString === activeAlarmTime && seconds === "00") {
@@ -91,6 +121,15 @@ function updateClock() {
 }
 setInterval(updateClock, 1000);
 updateClock();
+
+// World Clock Add Button
+document.getElementById("addCityBtn")?.addEventListener("click", () => {
+  const selectedZone = document.getElementById("citySelect").value;
+  if (!worldCities.includes(selectedZone)) {
+    worldCities.push(selectedZone);
+    updateWorldClocks();
+  }
+});
 
 // Alarm UI Event Listeners
 document.getElementById("setAlarmBtn").addEventListener("click", () => {

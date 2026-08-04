@@ -23,24 +23,24 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Force Clean Environment & Build APK
+      - name: Nuke Leftovers and Build
         run: |
-          # 1. Force initialize node and install Capacitor
+          # 1. Nuke any leftover configs from previous local attempts to prevent conflicts
+          rm -rf android www capacitor.config.* package*.json node_modules
+          
+          # 2. Fresh Node and Capacitor setup
           npm init -y
           npm install @capacitor/core @capacitor/cli @capacitor/android
           
-          # 2. Force create the 'www' folder Capacitor needs
+          # 3. Create the web folder and move your files into it
           mkdir -p www
           cp index.html style.css app.js manifest.json sw.js www/ || true
           
-          # 3. Force initialize Capacitor config to point to 'www'
-          npx cap init "Apex Clock" "com.suyog.clock" --web-dir www --force
+          # 4. Initialize Capacitor (creates a fresh capacitor.config.json)
+          npx cap init "Apex Clock" "com.suyog.clock" --web-dir www
           
-          # 4. Generate the Android platform natively on the server
+          # 5. Add Android and build
           npx cap add android
-          npx cap sync android
-          
-          # 5. Build the APK
           cd android
           chmod +x gradlew
           ./gradlew assembleDebug
